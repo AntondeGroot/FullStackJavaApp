@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'FullStackJavaApp' title`, () => {
+  it(`should have the 'ToDo' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('FullStackJavaApp');
+    expect(app.title).toEqual('ToDo');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, FullStackJavaApp');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ToDo');
   });
 });
