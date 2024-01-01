@@ -24,7 +24,7 @@ export class LoginComponent {
     this.invalidLogin = false;
 
     if(this.username == 'devadmin' && this.password == 'welkom01' ){
-      this.router.navigate(['welcome']);
+      this.router.navigate(['welcome', this.username]);
     }else{
       this.errorMessage = 'Invalid Credentials';
       this.invalidLogin = true;
