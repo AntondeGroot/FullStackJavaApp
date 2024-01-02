@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component} from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router, RouterLink, provideRouter } from '@angular/router';
+import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -11,19 +12,20 @@ import { Router, RouterLink, provideRouter } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username : String = ''
+  username : string = ''
   password : string = ''
   invalidLogin: boolean = false
   errorMessage: string = ''
 
 
-  constructor(private router: Router){}
+  constructor(private router: Router,
+    public hardcodedAuthenticationService: HardcodedAuthenticationService){}
 
   handleLogin(){
     this.errorMessage = ''
     this.invalidLogin = false;
 
-    if(this.username == 'devadmin' && this.password == 'welkom01' ){
+    if(this.hardcodedAuthenticationService.authenticate(this.username,this.password)){
       this.router.navigate(['welcome', this.username]);
     }else{
       this.errorMessage = 'Invalid Credentials';
