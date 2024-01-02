@@ -16,7 +16,7 @@ export class ListTodosComponent {
     new Todo(2,'Migrate to the south for winter',false, new Date()),
     new Todo(3,'Hibernate',false, new Date()),
     new Todo(4,'Learn to whistle',false, new Date()),
-    new Todo(5,'Learn to talk hive',true, new Date()),
+    new Todo(5,'Learn to talk jive',true, new Date()),
   ]
 }
 export class Todo{
