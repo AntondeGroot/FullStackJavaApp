@@ -1,31 +1,48 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TodoDataService } from '../service/data/todo-data.service';
 
 @Component({
   selector: 'app-list-todos',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './list-todos.component.html',
   styleUrl: './list-todos.component.css'
 })
 export class ListTodosComponent {
-  
-  todos = [
-    new Todo(1,'Learn to dance',false, new Date()),
-    new Todo(2,'Migrate to the south for winter',false, new Date()),
-    new Todo(3,'Hibernate',false, new Date()),
-    new Todo(4,'Learn to whistle',false, new Date()),
-    new Todo(5,'Learn to talk jive',true, new Date()),
-  ]
+  todos: Todo[];
+  message: string = '';
+
+  constructor(
+    private todoService: TodoDataService
+  ) {
+    this.todos = [];
+    this.todoService.retrieveAllTodos('username1').subscribe(
+      response => {
+        this.todos = response
+      }
+    );
+
+
+  }
+
+  deleteTodo(id: number) {
+    this.todoService.deleteTodo('username123',id).subscribe(
+      response => {
+        this.message = 'Delete Successful!'
+      }
+    );
+  }
 }
-export class Todo{
+
+export class Todo {
   constructor(
     public id: number,
     public description: string,
     public done: boolean,
     public targetDate: Date
-  ){
+  ) {
 
   }
 }
