@@ -1,0 +1,23 @@
+<h1>My Todo</h1>
+<div class="container">
+    <fieldset class="form-group">
+        <label class="form-control-label" for="description">Description: </label>
+        <input type="text" [(ngModel)]="todo.description" class="form-control" name="description" required="required"
+            id="description">
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label class="form-control-label" for="description">Date ready: </label>
+        <input type="date" 
+        [(ngModel)]="this.targetDate" 
+        (ngModelChange) = "todo.targetDate = $event"
+        class="form-control" name="targetDate" required="required">
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label class="form-check-label" for="isDoneChecked">Is Done</label>
+        <input type="checkbox" [(ngModel)]="todo.done" class="form-check" id="isDoneChecked">
+    </fieldset>
+
+    <button class="btn btn-success" (click)="saveTodo()">Save</button>
+</div>
