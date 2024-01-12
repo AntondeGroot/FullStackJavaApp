@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-todo-detail',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './todo-detail.component.html',
   styleUrl: './todo-detail.component.css'
 })
@@ -22,28 +22,39 @@ export class TodoDetailComponent {
     private route: ActivatedRoute,
     private todoService: TodoDataService,
     private datePipe: DatePipe
-  ){
-    
+  ) {
+
     this.id = this.route.snapshot.params['id'];
-    this.todo = new Todo(0,'',false,new Date());
-    todoService.retrieveTodo('devadmin',this.id).subscribe(
-      data => this.todo = data
+    this.todo = new Todo(this.id, '', false, new Date());
+    if (this.id != -1) {
+      todoService.retrieveTodo('devadmin', this.id).subscribe(
+        data => this.todo = data
       )
-    
+    }
+
   }
 
   saveTodo() {
-    this.todoService.updateTodo('devadmin',this.id,this.todo).subscribe(
-      data => {
-        console.log(data)
-        this.router.navigate(['/todos']);
-      }
-    )
+    if (this.id === -1) {
+      this.todoService.createTodo('devadmin', this.todo).subscribe(
+        data => {
+          console.log(data)
+          this.router.navigate(['/todos']);
+        }
+      )
+    }else{
+      this.todoService.updateTodo('devadmin', this.id, this.todo).subscribe(
+        data => {
+          console.log(data)
+          this.router.navigate(['/todos']);
+        }
+      )
+    }
   }
 
   get formattedDate() {
-    if(this.targetDate != null){
-     this.datePipe.transform(this.targetDate, 'yyyy-MM-dd');
+    if (this.targetDate != null) {
+      this.datePipe.transform(this.targetDate, 'yyyy-MM-dd');
     }
     return '';
   }
