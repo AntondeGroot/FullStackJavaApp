@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './list-todos.component.css'
 })
 export class ListTodosComponent {
+
   todos: Todo[];
   message: string = '';
 
@@ -43,6 +44,10 @@ export class ListTodosComponent {
   updateTodo(id: number) {
     this.router.navigate([`todos/${id}`]);
   }
+
+  addTodo() {
+    this.router.navigate([`todos/-1`]);
+    }
 }
 
 export class Todo {
