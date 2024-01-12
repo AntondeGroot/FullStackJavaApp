@@ -33,7 +33,12 @@ export class TodoDetailComponent {
   }
 
   saveTodo() {
-    this.router.navigate(['/todos']);
+    this.todoService.updateTodo('devadmin',this.id,this.todo).subscribe(
+      data => {
+        console.log(data)
+        this.router.navigate(['/todos']);
+      }
+    )
   }
 
   get formattedDate() {
